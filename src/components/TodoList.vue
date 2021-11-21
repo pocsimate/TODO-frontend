@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
-    <div class="list">
-      <ul>
-          <li v-for="todo in todos" v-bind:key="todo.id">{{ todo.id }} - {{ todo.content }}</li>
+    <div class="list-wrapper">
+      <ul class="todo-list">
+          <li class="todo-item" v-for="todo in todos" v-bind:key="todo.id">{{ todo.id }} - {{ todo.content }}</li>
       </ul>
     </div>
   </div>
@@ -31,3 +31,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.todo-item {
+    list-style: none;
+}
+</style>
