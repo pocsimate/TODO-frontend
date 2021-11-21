@@ -89,7 +89,7 @@ h6 {
 .card {
   display: flex;
   flex-direction: column;
-
+  justify-content: space-evenly;
   border-radius: 0.65rem;
   padding: 20px;
   box-shadow: 0 0 10px #a1a1a1;
