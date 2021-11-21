@@ -1,5 +1,5 @@
 <template>
-  <button :disabled="disabled" class="base-btn" @click="$emit('click', $event)">
+  <button :disabled="disabled" v-bind:class="{ transparent: transparent }" class="base-btn" @click="$emit('click', $event)">
     {{ text }}
   </button>
 </template>
@@ -9,6 +9,7 @@ export default {
   props: {
     disabled: { type: Boolean, default: false },
     text: { type: String },
+    transparent: { type: Boolean, default: false },
   },
 };
 </script>
@@ -29,5 +30,10 @@ export default {
   height: 40px;
   margin-top: 25px;
   transition: all ease-out 0.3s;
+}
+
+.transparent {
+  background: transparent;
+  border: 2px solid white;
 }
 </style>

@@ -13,7 +13,7 @@
           That's awesome! You can login by clicking on the button below. To skip
           this next time, you can ask us to remember your login creditentials.
         </h4>
-        <button @click="goToLogin" class="login-btn">Log in</button>
+        <base-button text="Log in" transparent="true" @click="goToLogin"/>
       </div>
     </div>
   </div>
@@ -22,11 +22,13 @@
 <script>
 import Signup from "../components/Signup.vue";
 import Footer from "../components/Footer.vue";
+import BaseButton from "../components/BaseButton.vue";
 
 export default {
   components: {
     Signup,
-    Footer,
+    Footer, 
+    BaseButton
   },
 
   methods: {
@@ -65,23 +67,6 @@ h4 {
 
 .login {
   color: white;
-}
-
-.login-btn {
-  font-size: 14px;
-  line-height: 30px;
-  background: transparent;
-  border: 2px solid white;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  width: 150px;
-  height: 40px;
-  transition: all ease-out 0.3s;
-}
-
-.login-btn:hover {
-  font-size: 16px;
 }
 
 .image {
