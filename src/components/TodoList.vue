@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="list-wrapper">
       <ul class="todo-list">
-          <li class="todo-item" v-for="todo in todos" v-bind:key="todo.id">{{ todo.id }} - {{ todo.content }} <v-btn icon class="ma-2"><v-icon>mdi-delete</v-icon></v-btn> </li>
+          <li class="todo-item" v-for="todo in todos" v-bind:key="todo.id">{{ todo.id }} - {{ todo.content }}</li>
       </ul>
     </div>
   </div>

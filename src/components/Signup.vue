@@ -14,15 +14,9 @@
       ></Input>
     </div>
     <div class="submit-area">
-      <div class="checkbox-wrapper">
-        <span
-          class="checkbox"
-          v-bind:class="{ checked: rememberMe }"
-          @click="toggleRememberMe"
-        ></span>
-        <span>Remember me.</span>
+      <div class="signup-btn">
+        <base-button class="signup-btn" text="Sign up" @click="signup" />
       </div>
-      <base-button class="signup-btn" text="Sign up" @click="signup" />
     </div>
   </div>
 </template>
@@ -49,10 +43,6 @@ export default {
         `Signin up... Email: ${this.email}, password: ${this.password}. Remember me: ${this.rememberMe}`
       );
     },
-
-    toggleRememberMe() {
-      this.rememberMe = this.rememberMe === false ? true : false;
-    },
   },
 };
 </script>
@@ -62,17 +52,14 @@ h1 {
   font-size: 30px;
   line-height: 30px;
   color: #757575;
+  margin-top: 0;
 }
 
 h6 {
   font-size: 14px;
   line-height: 19px;
   color: #a1a1a1;
-}
-
-.signup-btn {
-  position: absolute;
-  right: 0;
+  margin-bottom: 0;
 }
 
 .submit-area {
@@ -94,18 +81,7 @@ h6 {
   transform: translate(-50%, -50%);
 }
 
-.checkbox {
-  height: 10px;
-  width: 10px;
-  border: 1px solid black;
-  border-radius: 100%;
-  display: inline-block;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.checked {
-  background-color: #4a90e2;
-  border-color: #4a90e2;
+.signup-btn {
+  text-align: center;
 }
 </style>

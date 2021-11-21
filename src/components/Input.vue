@@ -35,7 +35,7 @@ export default {
     };
   },
   computed: {
-    passwordStrength: function () {
+    passwordStrength: function() {
       let length = this.inputText.length;
 
       if (length < 4) {
@@ -131,7 +131,6 @@ label {
   width: 100%;
   padding-top: 20px;
   outline: none;
-  height: 26px;
 }
 
 input:focus + label {

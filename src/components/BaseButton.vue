@@ -24,6 +24,7 @@ export default {
   background-color: #4a90e2;
   border: none;
   border-radius: 5px;
+  text-align: center;
   color: white;
   cursor: pointer;
   width: 150px;

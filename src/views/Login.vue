@@ -15,7 +15,7 @@
         ></Input>
         <div class="error-msg" v-if="errorMessage">{{ errorMessage }}</div>
       </div>
-      <div class="login">
+      <div class="login-area">
         <div class="login-button">
           <base-button text="Log in" @click="login" />
         </div>
@@ -74,12 +74,14 @@ h1 {
   font-size: 30px;
   line-height: 30px;
   color: #757575;
+  margin-top: 0;
 }
 
 h6 {
   font-size: 14px;
   line-height: 19px;
   color: #a1a1a1;
+  margin-bottom: 0;
 }
 
 .wrapper {
@@ -102,8 +104,6 @@ h6 {
 }
 
 .login-button {
-  position: absolute;
-  right: 50%;
-  transform: translateX(50%);
+  text-align: center;
 }
 </style>
