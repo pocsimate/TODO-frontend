@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Login from '../views/Login.vue'
 import Landing from '../views/Landing.vue'
+import Todos from '../components/Todos.vue'
 import store from '../store'
 
 Vue.use(VueRouter)
@@ -35,6 +36,14 @@ const routes = [
       requiresAuth: true
     }
   },
+  {
+    path: '/todos',
+    name: 'todos',
+    component: Todos,
+    meta: {
+      requiresAuth: true
+    }
+  },
 ]
 
 const router = new VueRouter({
@@ -44,7 +53,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(store.state.status)
   if(to.matched.some(record => record.meta.requiresAuth)) {
     if (store.getters.isLoggedIn) {
       next()

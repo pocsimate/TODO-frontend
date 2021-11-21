@@ -13,7 +13,7 @@
           That's awesome! You can login by clicking on the button below. To skip
           this next time, you can ask us to remember your login creditentials.
         </h4>
-        <base-button text="Log in" transparent="true" @click="goToLogin"/>
+        <base-button text="Log in" :transparent=true @click="goToLogin"/>
       </div>
     </div>
   </div>
