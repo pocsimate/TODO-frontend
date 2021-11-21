@@ -28,7 +28,6 @@ export default {
   cursor: pointer;
   width: 150px;
   height: 40px;
-  margin-top: 25px;
   transition: all ease-out 0.3s;
 }
 

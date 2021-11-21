@@ -81,6 +81,7 @@ h6 {
 
 .signup-wrapper {
   display: flex;
+  justify-content: space-evenly;
   flex-direction: column;
   border-radius: 0.65rem;
   padding: 20px;

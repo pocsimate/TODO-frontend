@@ -79,7 +79,7 @@ export default {
   position: absolute;
   top: 50%;
   right: 0%;
-  transform: translateY(-25%);
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -147,6 +147,7 @@ input:focus + label {
   background-repeat: no-repeat;
   position: absolute;
   top: 50%;
+  transform: translateY(-50%);
   right: 5%;
   cursor: pointer;
 }
