@@ -1,13 +1,11 @@
 <template>
-  <div class="wrapper">
-    <div>This is home.</div>
-    <router-link to="/dashboard">Dashboard</router-link>
-    <router-link to="/todos">Todos</router-link>
-  </div>
+    <the-navigation/>
 </template>
 
 <script>
-export default {};
+import TheNavigation from '../components/TheNavigation.vue';
+export default {
+  components: { TheNavigation },};
 </script>
 
 <style scoped></style>

@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -10,7 +11,8 @@ export default new Vuex.Store({
       status: '',
       user: {},
       todos: [],
-      error: ''
+      error: '',
+      jwt: ''
     },
     mutations: {
       authRequest(state){
@@ -22,46 +24,102 @@ export default new Vuex.Store({
       setTodos(state, todos) {
         state.todos = todos;
       },
-      logUserIn(state, user){
+      setUserInfo(state, user){
         state.user = user
+      },
+      setJWT(state, jwt) {
+        state.jwt = jwt
         state.status = 'loggedIn'
       },
-      getError(state, error){
+      setError(state, error){
         state.error = error
-      }, 
+      },
       logUserOut(state) {
         state.status = ''
         state.error = ''
+        state.jwt = ''
         Object.keys(state.user).forEach(key => state.user[key]=null);
       }
     },
     actions: {
+
         async login({commit}, loginData){
           commit('authRequest')
           try {
-            const resp = await axios.post('https://us-central1-ria-server-b1103.cloudfunctions.net/authenticate', loginData)
-            if(resp.data.result.error){
-              commit('getError', resp.data.result.error)
-              console.log(resp.data.result.error);
-            } else {
-              commit('logUserIn', resp.data.result)
-            }
+            console.log(loginData);
+            const resp = await axios.post('http://localhost:8080/api/v1/user/login', loginData)
+              commit('setJWT', resp.data)
+              console.log(resp);
+          } catch (error) {
+            console.log(error)
+            commit("setError", "Login failed due to incorrect credentials")
+          }
+        },
+
+        async register({commit}, userData) {
+          try {
+            console.log(userData);
+            await axios.post('http://localhost:8080/api/v1/user/register', userData)
+          } catch(error) {
+            console.log(error);
+            commit("setError", "An error occured during registration")
+          }
+        },
+
+        async fetchUserInfo({commit, state}) {
+          const config = {
+            headers: { Authorization: `Bearer ${state.jwt}` }
+          };
+          try {
+            const resp = await axios.get('http://localhost:8080/api/v1/user/me', config)
+            commit('setUserInfo', resp.data)
           } catch (error) {
             console.log(error)
           }
         },
-        async fetchTodos({commit}) {
-          const resp = await axios.get("http://192.168.0.17:8080/api/v1/todo");
-          commit('setTodos', resp.data)
+
+        async fetchTodos({commit, state}) {
+          const config = {
+            headers: { Authorization: `Bearer ${state.jwt}` }
+          };
+          try {
+            const resp = await axios.get("http://localhost:8080/api/v1/todo", config)
+            commit('setTodos', resp.data)
+          } catch (error) {
+            console.log(error)
+          }
         },
-        async addNewTodo({commit}, todo) {
-          const resp = await axios.post("http://192.168.0.17:8080/api/v1/todo", todo);
-          commit('addTodo', resp.data)
+
+        async addNewTodo({commit, state}, todo) {
+          const config = {
+            headers: { Authorization: `Bearer ${state.jwt}` }
+          };
+          try {
+            const resp = await axios.post("http://localhost:8080/api/v1/todo", todo, config)
+            commit('addTodo', resp.data)
+          } catch (error) {
+            console.log(error)
+          }
         },
+
+        async deleteTodo({state, dispatch}, todoId) {
+          const config = {
+            headers: { Authorization: `Bearer ${state.jwt}` }
+          };
+          try {
+            const resp =await axios.delete(`http://localhost:8080/api/v1/todo/${todoId}`, config)
+            console.log(resp);
+            dispatch("fetchTodos")
+          } catch (error) {
+            console.log(error)
+          }
+        },
+
         logout({commit}) {
           commit('logUserOut')
         }
     },
+
     getters : {
       isLoggedIn: state => {
         return state.status === 'loggedIn'

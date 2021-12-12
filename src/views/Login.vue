@@ -1,12 +1,12 @@
 <template>
-  <div class="wrapper">
+  <div class="card-wrapper">
     <div class="card">
       <div class="text-area">
         <h1>Welcome to Acme.</h1>
         <h6>Log in to your account by filling the form below.</h6>
       </div>
       <div class="input-area">
-        <Input type="text" v-model="email" label="Email" kind="login"></Input>
+        <Input type="text" v-model="username" label="Username" kind="login"></Input>
         <Input
           type="password"
           v-model="password"
@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      email: "",
+      username: "",
       password: "",
       errorMessage: "",
     };
@@ -43,27 +43,17 @@ export default {
   methods: {
     async login() {
       await this.$store.dispatch("login", {
-        data: {
-          email: this.email,
-          password: this.password,
-        },
+        username: this.username,
+        password: this.password,
       });
       if (this.$store.getters.isLoggedIn) {
-        this.$router.push({ name: "home" });
+        this.$router.push({ name: "home" })
       } else {
         this.showErrors();
       }
     },
     showErrors() {
-      let error = this.$store.getters.getError;
-      if (error === "Invalid password") {
-        this.errorMessage = "The password you entered is incorrect";
-      } else if (error == "Invalid e-mail") {
-        this.errorMessage = "The e-mail address you entered is incorrect";
-      } else {
-        this.errorMessage =
-          "The e-mail address and password you entered are incorrect";
-      }
+      this.errorMessage = this.$store.getters.getError
     },
   },
 };
@@ -83,9 +73,10 @@ h6 {
   color: #a1a1a1;
   margin-bottom: 0;
 }
-
-.wrapper {
-  position: relative;
+.card-wrapper {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .card {
@@ -100,7 +91,7 @@ h6 {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 50%);
+  transform: translate(-50%, -50%);
 }
 
 .login-button {

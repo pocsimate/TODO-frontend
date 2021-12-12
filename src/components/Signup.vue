@@ -5,18 +5,29 @@
       <h6>Create your account by filling the form below</h6>
     </div>
     <div class="input-area">
-      <Input type="text" v-model="email" label="Email" kind="signup"></Input>
+      <Input
+        type="text"
+        v-model="username"
+        label="Username"
+        kind="signup"
+      ></Input>
       <Input
         type="password"
         v-model="password"
         label="Password"
         kind="signup"
       ></Input>
+      <div class="date-picker">
+        Date of birth
+        {{birthDate}}
+        <datepicker v-model="birthDate" :format="customFormatter"></datepicker>
+      </div>
     </div>
     <div class="submit-area">
       <div class="signup-btn">
         <base-button class="signup-btn" text="Sign up" @click="signup" />
       </div>
+      <div v-if="error">Something is wrong</div>
     </div>
   </div>
 </template>
@@ -24,24 +35,35 @@
 <script>
 import Input from "./Input.vue";
 import BaseButton from "../components/BaseButton.vue";
+import Datepicker from 'vuejs-datepicker';
+import moment from 'moment';
 
 export default {
   components: {
     Input,
     BaseButton,
+    Datepicker
   },
   data() {
     return {
-      email: "",
+      username: "",
       password: "",
-      rememberMe: false,
+      birthDate: "",
+      error: false
     };
   },
   methods: {
-    signup() {
-      console.log(
-        `Signin up... Email: ${this.email}, password: ${this.password}. Remember me: ${this.rememberMe}`
-      );
+    customFormatter(date) {
+      return moment(date).format('YYYY-MM-DD');
+    },
+
+    async signup() {
+      await this.$store.dispatch('register', {
+        username: this.username,
+        password: this.password,
+        birthDate: moment(this.birthDate).format("YYYY-MM-DD").toString()
+      })
+      this.$router.push({ name: "login" })
     },
   },
 };
@@ -64,6 +86,10 @@ h6 {
 
 .submit-area {
   position: relative;
+}
+
+.date-picker {
+  color: #757575;
 }
 
 .signup-wrapper {

@@ -29,18 +29,17 @@ export default {
     };
   },
   methods: {
-    getUserData() {
-      this.userInfo = JSON.parse(
-        JSON.stringify(this.$store.getters.getUserInfo)
-      );
+    async getUserData() {
+      await this.$store.dispatch("fetchUserInfo")
+      this.userInfo = this.$store.getters.getUserInfo
     },
     logout() {
       this.$store.dispatch("logout");
       this.$router.push("/");
     },
   },
-  mounted() {
-    this.getUserData();
+  async mounted() {
+    await this.getUserData();
   },
 };
 </script>

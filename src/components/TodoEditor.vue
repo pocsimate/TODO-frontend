@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="editor">
       <input class="todo-input" type="text" v-model="todoContent" />
-      <base-button text="Add Todo" @click="addTodo" />
+      <base-button class="add-btn" text="Add todo" @click="addTodo" />
     </div>
   </div>
 </template>
@@ -31,5 +31,19 @@ export default {
 </script>
 
 <style scoped>
+.todo-input {
+  width: 400px;
+  height: 30px;
+  border: thin solid black;
+  border-radius: 5px;
+  margin: 10px auto;
+}
+.editor {
+  display: flex;
+  flex-direction: column;
+}
 
+.add-btn {
+  margin: 5px auto;
+}
 </style>
